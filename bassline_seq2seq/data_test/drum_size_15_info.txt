@@ -1,0 +1,16 @@
+release	drum
+../../../../experiment_cases_Soca/S01-203222	../../../../experiment_cases_Soca/S01-203222/drum_transcription_.txt
+../../../../experiment_cases_Soca/S02-241612	../../../../experiment_cases_Soca/S02-241612/drum_transcription_.txt
+../../../../experiment_cases_Soca/S03-445672	../../../../experiment_cases_Soca/S03-445672/drum_transcription_.txt
+../../../../experiment_cases_Soca/S04-611848	../../../../experiment_cases_Soca/S04-611848/drum_transcription_.txt
+../../../../experiment_cases_Soca/S05-650753	../../../../experiment_cases_Soca/S05-650753/drum_transcription_.txt
+../../../../experiment_cases_Soca/S06-789092	../../../../experiment_cases_Soca/S06-789092/drum_transcription_.txt
+../../../../experiment_cases_Soca/S07-793178	../../../../experiment_cases_Soca/S07-793178/drum_transcription_.txt
+../../../../experiment_cases_Soca/S08-891966	../../../../experiment_cases_Soca/S08-891966/drum_transcription_.txt
+../../../../experiment_cases_Soca/S09-906526	../../../../experiment_cases_Soca/S09-906526/drum_transcription_.txt
+../../../../experiment_cases_Soca/S10-983839a	../../../../experiment_cases_Soca/S10-983839a/drum_transcription_.txt
+../../../../experiment_cases_Soca/S11-1025386	../../../../experiment_cases_Soca/S11-1025386/drum_transcription_.txt
+../../../../experiment_cases_Soca/S12-1078119	../../../../experiment_cases_Soca/S12-1078119/drum_transcription_.txt
+../../../../experiment_cases_Soca/S13-1114308	../../../../experiment_cases_Soca/S13-1114308/drum_transcription_.txt
+../../../../experiment_cases_Soca/S14-1125186	../../../../experiment_cases_Soca/S14-1125186/drum_transcription_.txt
+../../../../experiment_cases_Soca/S15-1244937	../../../../experiment_cases_Soca/S15-1244937/drum_transcription_.txt
