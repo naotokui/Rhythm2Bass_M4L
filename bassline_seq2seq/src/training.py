@@ -11,7 +11,8 @@ from IPython.display import SVG
 
 #%%
 
-BASS_PADDING = 63
+# Constants
+BASS_PADDING = 63 # end of sequence
 
 #%%
 import keras
@@ -20,13 +21,16 @@ import tensorflow as tf
 print(keras.__version__)
 print(tf.__version__)
 
+tf.Session()
+
+
 
 #%%
 import numpy as np
 
 data = np.load("../../data/tv_themes__magenta__min_pitch_24__max_pitch_84__q_note_res_4__infer_chords_True__n_bars_4__max_cont_rests_16__max_N_inf.npz", allow_pickle=True)
 triplets = data['triplets']
-
+len(triplets)
 # %%
 
 bassline = []
@@ -86,7 +90,7 @@ def get_input_bassline(seqs):
 
 
 bassline_input = get_input_bassline(bassline)
-bassline_input_mapped = convert_sequence(bassline_input, unique_bass)
+bassline_input_mapped = convert_sequence(bassline_input, unique_bass) # reversed sequence
 bassline_mapped = convert_sequence(bassline, unique_bass)
 drums_mapped = convert_sequence(drums, unique_drums)
 print(bassline_mapped.shape, drums_mapped.shape)
@@ -94,7 +98,7 @@ print(bassline_mapped.shape, drums_mapped.shape)
 
 # %%
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '2'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 #%%
 from keras.models import Model
@@ -147,12 +151,20 @@ decoder.summary()
 # %%
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc'])
 # %%
-history = model.fit([drums_mapped, bassline_input_mapped], bassline_mapped, epochs=1000)
+history = model.fit([drums_mapped, bassline_input_mapped], bassline_mapped, epochs=400)
 # %%
 
 model.save("../tmp/model.h5")
 encoder.save("../tmp/encoder.h5")
 decoder.save("../tmp/decoder.h5")
+
+# %%
+
+from keras.models import load_model
+
+model = load_model("../tmp/model.h5")
+encoder = load_model("../tmp/encoder.h5")
+decoder = load_model("../tmp/decoder.h5")
 
 # %%
 import random
@@ -162,34 +174,51 @@ drum_input = np.expand_dims(drum_input, 0)
 
 print(drum_input.shape)
 
-# encode
-state = encoder.predict(drum_input)
+# # encode
+# state = encoder.predict(drum_input)
 
-# start of sequence input
-target_seq = np.array([0.0 for _ in range(num_output)]).reshape(1, 1, num_output)
-print(target_seq.shape)
+# # start of sequence input
+# target_seq = np.array([0.0 for _ in range(num_output)]).reshape(1, 1, num_output)
+# print(target_seq.shape)
 
-# collect predictions
-output = list()
+# # collect predictions
+# output = list()
 
 
 # %%
-n_steps = 64
-for t in range(n_steps):
-    # predict next char
-    yhat, h, c = decoder.predict([target_seq] + state)
-    # store prediction
-    output.append(yhat[0, 0, :])
-    # update state
-    state = [h, c]
-    # update target sequence
-    target_seq = yhat
-output = np.array(output)
+def generate_bassline(drum_input):
+    state = encoder.predict(drum_input)
+    
+    # start of sequence input
+    target_seq = np.array([0.0 for _ in range(num_output)]).reshape(1, 1, num_output)
+    print(target_seq.shape)
+
+    # collect predictions
+    output = list()
+
+    n_steps = 64
+    for t in range(n_steps):
+        # predict next char
+        yhat, h, c = decoder.predict([target_seq] + state)
+        # store prediction
+        output.append(yhat[0, 0, :])
+        # update state
+        state = [h, c]
+        # update target sequence
+        target_seq = yhat
+    output = np.array(output)
+
+    bassline_gen = []
+    for step in range(output.shape[0]):
+        b = output[step]
+        index = np.argmax(b)
+        bass_pitch = unique_bass[index]
+        bassline_gen.append(bass_pitch)
+    return bassline_gen
 # %%
 
-print(np.argmax(output, axis=1).shape)
+generate_bassline(drum_input)
 
-print(output.shape)
 # %%
 
 for step in range(output.shape[0]):
