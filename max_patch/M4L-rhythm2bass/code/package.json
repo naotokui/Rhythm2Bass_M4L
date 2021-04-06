@@ -1,7 +1,6 @@
 {
   "name": "code",
   "version": "1.0.0",
-  "description": "",
   "main": "rhythm2bass.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tensorflow/tfjs-node": "^3.3.0"
-  }
+    "@tensorflow/tfjs-node": "^3.3.0",
+    "glob": "^7.1.6",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "description": ""
 }
