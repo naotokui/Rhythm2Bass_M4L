@@ -3,8 +3,9 @@ const Max = require('max-api');
 const fs = require('fs')
 const tf = require('@tensorflow/tfjs-node');
 const { assert } = require('console');
+const constants = require('./constants.js');
 
-const UNIQUE_DRUM_VALUES = require('./constants.js').UNIQUE_DRUM_VALUES;
+const UNIQUE_DRUM_VALUES = constants.UNIQUE_DRUM_VALUES;
 const NUM_UNIQUE_DRUM_VALUES = UNIQUE_DRUM_VALUES.length;
 const NUM_UNIQUE_BASS_VALUES = 64;
 const NUM_STEPS = 64;
@@ -77,3 +78,65 @@ async function generateBassline(){
 Max.addHandler("generate", ()=>{
     generateBassline();
 });
+
+
+
+// Start encoding... reset input matrix
+var input_onset;
+Max.addHandler("encode_start", (is_test) =>  {
+    Max.post("encode_start");
+    input_onset     = utils.create2DArray(NUM_STEPS, NUM_UNIQUE_DRUM_VALUES);
+
+    if (is_test){
+        for (var i=0; i < NUM_STEPS; i=i+4){
+            input_onset[0][i] = 1;
+            input_velocity[0][i] = 0.8;
+        }
+        
+    }
+});
+
+Max.addHandler("encode_add", (pitch, time, duration, velocity, muted, mapping) =>  {
+
+    // select mapping
+    let midi_map = constants.MAGENTA_MIDI_MAP;;
+
+    // add note
+    if (!muted){
+        var unit = 0.25; // 1.0 = quarter note   grid size = 16th note 
+        const half_unit = unit * 0.5;
+        const index = Math.max(0, Math.floor((time + half_unit) / unit)) // centering 
+        Max.post("index", index, timeshift, pitch);
+        if (index < NUM_STEPS){
+            if (pitch in midi_map){
+                let drum_id = midi_map[pitch];
+                Max.post("pitch", pitch, drum_id);
+                input_onset[drum_id][index]     = 1;
+            } else {
+                console.log("MIDI note pitch not found", pitch)
+            }
+        } 
+    }
+});
+
+Max.addHandler("encode_done", () =>  {
+    utils.post(input_onset);
+    utils.post(input_velocity);
+    utils.post(input_timeshift);
+
+    // Encoding!
+    var inputOn     = tf.tensor2d(input_onset, [NUM_DRUM_CLASSES, LOOP_DURATION])
+    var inputVel    = tf.tensor2d(input_velocity, [NUM_DRUM_CLASSES, LOOP_DURATION])
+    var inputTS     = tf.tensor2d(input_timeshift, [NUM_DRUM_CLASSES, LOOP_DURATION])
+    let zs = vae.encodePattern(inputOn, inputVel, inputTS);
+    
+    // output encoded z vector
+    utils.post(zs)
+    Max.outlet("zs", zs[0], zs[1]);  
+});
+
+
+let test_input = constants.test_input;
+for (let i=0; i < test_input.length; i++){
+    console.log(test_input[i]);
+}
