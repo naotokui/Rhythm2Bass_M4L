@@ -85,14 +85,13 @@ Max.addHandler("generate", ()=>{
 var input_onset;
 Max.addHandler("encode_start", (is_test) =>  {
     Max.post("encode_start");
-    input_onset     = utils.create2DArray(NUM_STEPS, NUM_UNIQUE_DRUM_VALUES);
+    input_onset     = utils.create2DArray(NUM_UNIQUE_DRUM_VALUES, NUM_STEPS);
 
     if (is_test){
         for (var i=0; i < NUM_STEPS; i=i+4){
             input_onset[0][i] = 1;
             input_velocity[0][i] = 0.8;
         }
-        
     }
 });
 
@@ -120,19 +119,20 @@ Max.addHandler("encode_add", (pitch, time, duration, velocity, muted, mapping) =
 });
 
 Max.addHandler("encode_done", () =>  {
-    utils.post(input_onset);
-    utils.post(input_velocity);
-    utils.post(input_timeshift);
+    Max.post(input_onset);
+    console.log(input_onset);
+    // utils.post(input_velocity);
+    // utils.post(input_timeshift);
 
-    // Encoding!
-    var inputOn     = tf.tensor2d(input_onset, [NUM_DRUM_CLASSES, LOOP_DURATION])
-    var inputVel    = tf.tensor2d(input_velocity, [NUM_DRUM_CLASSES, LOOP_DURATION])
-    var inputTS     = tf.tensor2d(input_timeshift, [NUM_DRUM_CLASSES, LOOP_DURATION])
-    let zs = vae.encodePattern(inputOn, inputVel, inputTS);
+    // // Encoding!
+    // var inputOn     = tf.tensor2d(input_onset, [NUM_DRUM_CLASSES, LOOP_DURATION])
+    // var inputVel    = tf.tensor2d(input_velocity, [NUM_DRUM_CLASSES, LOOP_DURATION])
+    // var inputTS     = tf.tensor2d(input_timeshift, [NUM_DRUM_CLASSES, LOOP_DURATION])
+    // let zs = vae.encodePattern(inputOn, inputVel, inputTS);
     
-    // output encoded z vector
-    utils.post(zs)
-    Max.outlet("zs", zs[0], zs[1]);  
+    // // output encoded z vector
+    // utils.post(zs)
+    // Max.outlet("zs", zs[0], zs[1]);  
 });
 
 
