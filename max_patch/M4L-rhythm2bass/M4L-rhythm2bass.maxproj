@@ -2,7 +2,7 @@
 	"name" : "M4L-rhythm2bass",
 	"version" : 1,
 	"creationdate" : 3700577925,
-	"modificationdate" : 3700578099,
+	"modificationdate" : 3701166563,
 	"viewrect" : [ 25.0, 104.0, 300.0, 500.0 ],
 	"autoorganize" : 1,
 	"hideprojectwindow" : 0,
@@ -33,11 +33,37 @@
 	}
 ,
 	"searchpath" : 	{
+		"0" : 		{
+			"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/code",
+			"projectrelativepath" : "./code",
+			"label" : "",
+			"recursive" : 1,
+			"enabled" : 1,
+			"includeincollective" : 1
+		}
+,
+		"1" : 		{
+			"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/models_tfjs",
+			"projectrelativepath" : "./models_tfjs",
+			"label" : "",
+			"recursive" : 1,
+			"enabled" : 1,
+			"includeincollective" : 1
+		}
+,
+		"2" : 		{
+			"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers",
+			"projectrelativepath" : "./patchers",
+			"label" : "",
+			"recursive" : 1,
+			"enabled" : 1,
+			"includeincollective" : 1
+		}
 
 	}
 ,
 	"detailsvisible" : 0,
-	"amxdtype" : 0,
+	"amxdtype" : 1835887981,
 	"readonly" : 0,
 	"devpathtype" : 0,
 	"devpath" : ".",

@@ -4,9 +4,11 @@ const fs = require('fs')
 const tf = require('@tensorflow/tfjs-node');
 const { assert } = require('console');
 const constants = require('./constants.js');
+const utils = require('./utils.js');
 
 const UNIQUE_DRUM_VALUES = constants.UNIQUE_DRUM_VALUES;
 const NUM_UNIQUE_DRUM_VALUES = UNIQUE_DRUM_VALUES.length;
+const NUM_DRUM_CLASSES = constants.NUM_DRUM_CLASSES;
 const NUM_UNIQUE_BASS_VALUES = 64;
 const NUM_STEPS = 64;
 
@@ -85,7 +87,7 @@ Max.addHandler("generate", ()=>{
 var input_onset;
 Max.addHandler("encode_start", (is_test) =>  {
     Max.post("encode_start");
-    input_onset     = utils.create2DArray(NUM_STEPS, NUM_UNIQUE_DRUM_VALUES);
+    input_onset     = utils.create2DArray(NUM_STEPS, NUM_DRUM_CLASSES);
 
     if (is_test){
         for (var i=0; i < NUM_STEPS; i=i+4){
@@ -106,7 +108,7 @@ Max.addHandler("encode_add", (pitch, time, duration, velocity, muted, mapping) =
         var unit = 0.25; // 1.0 = quarter note   grid size = 16th note 
         const half_unit = unit * 0.5;
         const index = Math.max(0, Math.floor((time + half_unit) / unit)) // centering 
-        Max.post("index", index, timeshift, pitch);
+        Max.post("index", index, pitch);
         if (index < NUM_STEPS){
             if (pitch in midi_map){
                 let drum_id = midi_map[pitch];
@@ -121,18 +123,11 @@ Max.addHandler("encode_add", (pitch, time, duration, velocity, muted, mapping) =
 
 Max.addHandler("encode_done", () =>  {
     utils.post(input_onset);
-    utils.post(input_velocity);
-    utils.post(input_timeshift);
-
-    // Encoding!
-    var inputOn     = tf.tensor2d(input_onset, [NUM_DRUM_CLASSES, LOOP_DURATION])
-    var inputVel    = tf.tensor2d(input_velocity, [NUM_DRUM_CLASSES, LOOP_DURATION])
-    var inputTS     = tf.tensor2d(input_timeshift, [NUM_DRUM_CLASSES, LOOP_DURATION])
-    let zs = vae.encodePattern(inputOn, inputVel, inputTS);
     
+    // Encoding!
+    var inputOn     = tf.tensor2d(input_onset, [NUM_STEPS, NUM_DRUM_CLASSES]);
     // output encoded z vector
-    utils.post(zs)
-    Max.outlet("zs", zs[0], zs[1]);  
+    utils.post(inputOn);
 });
 
 
