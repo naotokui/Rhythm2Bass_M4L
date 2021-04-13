@@ -5,15 +5,24 @@ const tf = require('@tensorflow/tfjs-node');
 const { assert } = require('console');
 const constants = require('./constants.js');
 const utils = require('./utils.js');
+const { util } = require('@tensorflow/tfjs-node');
 
 const UNIQUE_DRUM_VALUES = constants.UNIQUE_DRUM_VALUES;
 const NUM_UNIQUE_DRUM_VALUES = UNIQUE_DRUM_VALUES.length;
 const NUM_DRUM_CLASSES = constants.NUM_DRUM_CLASSES;
-const NUM_UNIQUE_BASS_VALUES = 64;
 const NUM_STEPS = 64;
 
-let decoder, encoder;
+const MIN_PITCH_BASS = constants.MIN_PITCH_BASS;
+const MAX_PITCH_BASS = constants.MAX_PITCH_BASS;
+const NUM_BASS_PITCH = constants.NUM_BASS_PITCH;
+const REST_PITCH_BASS = constants.REST_PITCH_BASS; // 61
+const NOTEOFF_PITCH_BASS = constants.NOTEOFF_PITCH_BASS; // 62
+const NUM_UNIQUE_BASS_VALUES = 64;//constants.NUM_UNIQUE_BASS_VALUES;
+console.log("NUM_UNIQUE_BASS_VALUES", NUM_UNIQUE_BASS_VALUES);
+console.log("REST_PITCH_BASS", REST_PITCH_BASS);
+console.log("NOTEOFF_PITCH_BASS", NOTEOFF_PITCH_BASS);
 
+let decoder, encoder;
 Max.post(`Loaded the ${path.basename(__filename)} script`);
 
 async function loadModels(){
@@ -44,16 +53,20 @@ function drumArrayToMatrix(input){
     return matrix;
 }
 
-async function generateBassline(){
+async function generateBassline(drum_array){
 
-    let test_input =[ 6,  0,  0,  0,  0,  0,  0,  0, 34,  0,  0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0,  0,  0,
-    34,  0,  0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0,  0,  0, 34,  0,  0,  0,  0,  0,  0,  0,
-     6, 0,  0,  0,  0,  0,  0,  0, 34,  0,  0,  0,  0,  0,  0,  0];
-    let test_matrix = drumArrayToMatrix(test_input);
+    if (drum_array == null){
+        drum_array =[ 6,  0,  0,  0,  0,  0,  0,  0, 34,  0,  0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0,  0,  0,
+                    34,  0,  0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0,  0,  0, 34,  0,  0,  0,  0,  0,  0,  0,
+                    6, 0,  0,  0,  0,  0,  0,  0, 34,  0,  0,  0,  0,  0,  0,  0];
+    }
+    utils.post(drum_array);
+    let input_matrix = drumArrayToMatrix(drum_array);
     
     // Encode input drum pattern
-    let input = tf.tensor2d(test_matrix, [NUM_STEPS, NUM_UNIQUE_DRUM_VALUES])
-    input = tf.reshape(input, [1, NUM_STEPS, NUM_UNIQUE_DRUM_VALUES])
+    let input = tf.tensor2d(input_matrix, [NUM_STEPS, NUM_UNIQUE_DRUM_VALUES])
+    input = tf.reshape(input_matrix, [1, NUM_STEPS, NUM_UNIQUE_DRUM_VALUES])
+    console.log(input);
     let state = encoder.predict(input);
 
     // Empty input bassline
@@ -73,7 +86,46 @@ async function generateBassline(){
         target_seq = yhat
     }
     console.log(output);
+    utils.post(output);
+    
+    // For sequencer output
+    var pitch_sequence = [];
+    var velocity_sequence = [];
+    var duration_sequence = [];
 
+    // output to max sequencer
+    for (let i=0; i< NUM_STEPS; i++){
+        let pitch = output[i];
+        
+        // how long this onset should long
+        let duration_count = 1; 
+        if (isBassOnset(pitch)){
+            for (let j=i+1; j <NUM_STEPS; j++){
+                let new_pitch = output[j];
+                // note off or note-on of other pitch
+                if (isBassOnset(new_pitch) || new_pitch == NOTEOFF_PITCH_BASS) break;
+                duration_count++;
+            }
+            // normalize duration to 0 - 127
+            let duration = Math.floor((duration_count * 8))
+            pitch_sequence.push(pitch + MIN_PITCH_BASS)
+            velocity_sequence.push(100);
+            duration_sequence.push(duration);
+        } else{
+            pitch_sequence.push(0)
+            velocity_sequence.push(0);
+            duration_sequence.push(0);
+        }    
+    }
+
+    Max.outlet("pitch_output", 1, pitch_sequence.join(" "));
+    Max.outlet("velocity_output", 1, velocity_sequence.join(" "));
+    Max.outlet("duration_output", 1, duration_sequence.join(" "));
+    Max.outlet("generated", 1); 
+}
+
+function isBassOnset(pitch){
+    return (pitch < REST_PITCH_BASS);
 }
 
 // Generate a rhythm pattern
@@ -88,14 +140,6 @@ var input_onset;
 Max.addHandler("encode_start", (is_test) =>  {
     Max.post("encode_start");
     input_onset     = utils.create2DArray(NUM_STEPS, NUM_DRUM_CLASSES);
-
-    if (is_test){
-        for (var i=0; i < NUM_STEPS; i=i+4){
-            input_onset[0][i] = 1;
-            input_velocity[0][i] = 0.8;
-        }
-        
-    }
 });
 
 Max.addHandler("encode_add", (pitch, time, duration, velocity, muted, mapping) =>  {
@@ -113,7 +157,7 @@ Max.addHandler("encode_add", (pitch, time, duration, velocity, muted, mapping) =
             if (pitch in midi_map){
                 let drum_id = midi_map[pitch];
                 Max.post("pitch", pitch, drum_id);
-                input_onset[drum_id][index]     = 1;
+                input_onset[index][drum_id]     = 1;
             } else {
                 console.log("MIDI note pitch not found", pitch)
             }
@@ -124,14 +168,20 @@ Max.addHandler("encode_add", (pitch, time, duration, velocity, muted, mapping) =
 Max.addHandler("encode_done", () =>  {
     utils.post(input_onset);
     
-    // Encoding!
-    var inputOn     = tf.tensor2d(input_onset, [NUM_STEPS, NUM_DRUM_CLASSES]);
+    let drum_array = [];
+    for (let i=0; i < NUM_STEPS; i++){
+        let step_onset = []; // onsets in the step
+        for (let j=0; j < NUM_DRUM_CLASSES; j++){
+            if (input_onset[i][j] > 0) step_onset.push(j);
+        }
+        let drumComboId = constants.getDrumComboId(step_onset);
+        drum_array.push(drumComboId);
+        utils.post("step/drumcombo", step_onset, drumComboId);
+        console.log("step/drumcombo", step_onset, drumComboId);
+    }
+    
+    // // Encoding!
+    // var inputOn     = tf.tensor2d(input_onset, [NUM_STEPS, NUM_DRUM_CLASSES]);
     // output encoded z vector
-    utils.post(inputOn);
+    generateBassline(drum_array);
 });
-
-
-let test_input = constants.test_input;
-for (let i=0; i < test_input.length; i++){
-    console.log(test_input[i]);
-}

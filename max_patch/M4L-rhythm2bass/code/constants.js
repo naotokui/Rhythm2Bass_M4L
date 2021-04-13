@@ -10,6 +10,21 @@ const UNIQUE_DRUM_VALUES = [0,   1,   2,   3,   4,   5,   6,   7,   8,   9,  10,
     200,  215,  253,  260,  304,  323,  359,  414,  415];
 exports.UNIQUE_DRUM_VALUES = UNIQUE_DRUM_VALUES;
 
+const MIN_PITCH_BASS = 24;
+const MAX_PITCH_BASS = 84;
+const NUM_BASS_PITCH = MAX_PITCH_BASS - MIN_PITCH_BASS + 1;
+const REST_PITCH_BASS = NUM_BASS_PITCH + 0;
+const NOTEOFF_PITCH_BASS = NUM_BASS_PITCH + 1;
+const NUM_UNIQUE_BASS_VALUES = NUM_BASS_PITCH + 2;
+
+exports.MIN_PITCH_BASS = MIN_PITCH_BASS;
+exports.MAX_PITCH_BASS = MAX_PITCH_BASS;
+exports.REST_PITCH_BASS = REST_PITCH_BASS;
+exports.NOTEOFF_PITCH_BASS = NOTEOFF_PITCH_BASS;
+exports.NUM_UNIQUE_BASS_VALUES = NUM_UNIQUE_BASS_VALUES;
+
+
+
 const MAGENTA_MIDI_MAP = {
     36: 0,
     38: 1,
@@ -64,75 +79,74 @@ let  drumArray = [];
 for (let i=0; i < NUM_DRUM_CLASSES; i++) {
     drumArray.push(i);
 }
-DRUM_COMBOS = getPermutations(drumArray, 8);
+DRUM_COMBOS = getPermutations(drumArray, NUM_DRUM_CLASSES);
 exports.DRUM_COMBOS = DRUM_COMBOS;
 
 // Find ID in DRUM_COMBO array
 function getDrumComboId(inputArray){
-    if (inputArray.length == 0) return 1; 
+    if (inputArray.length == 0) return 0; 
 
     inputArray.sort();    
     for (let i = 0; i < DRUM_COMBOS.length; i++){
         if (DRUM_COMBOS[i].length == inputArray.length && 
             DRUM_COMBOS[i].every((val, index) => val === inputArray[index]))
-            return i;
+            return i + 1; // 0 is for empty
     }
     console.error("Something wrong with drum id", inputArray);
     return -1; // error
 }
+exports.getDrumComboId = getDrumComboId;
 
-// let drumId = getDrumComboId([3, 2, 9])
+// let drumId = getDrumComboId([0])
 // console.log(drumId, DRUM_COMBOS[drumId]);
 
-
-
-const test_input = [[36, 0., 0.25, 127, 0],
-[36, 2., 0.25, 127, 0],
-[36, 4., 0.25, 127, 0],
-[36, 6., 0.25, 127, 0],
-[36, 8., 0.25, 127, 0],
-[36, 10., 0.25, 127, 0],
-[36, 12., 0.25, 127, 0],
-[36, 14., 0.25, 127, 0],
-[38, 1., 0.25, 127, 0],
-[38, 3., 0.25, 127, 0],
-[38, 5., 0.25, 127, 0],
-[38, 7., 0.25, 127, 0],
-[38, 9., 0.25, 127, 0],
-[38, 11., 0.25, 127, 0],
-[38, 13., 0.25, 127, 0],
-[38, 15., 0.25, 127, 0],
-[42, 0., 0.25, 127, 0],
-[42, 0.5, 0.25, 127, 0],
-[42, 1., 0.25, 127, 0],
-[42, 1.5, 0.25, 127, 0],
-[42, 2., 0.25, 127, 0],
-[42, 2.5, 0.25, 127, 0],
-[42, 3., 0.25, 127, 0],
-[42, 3.5, 0.25, 127, 0],
-[42, 4., 0.25, 127, 0],
-[42, 4.5, 0.25, 127, 0],
-[42, 5., 0.25, 127, 0],
-[42, 5.5, 0.25, 127, 0],
-[42, 6., 0.25, 127, 0],
-[42, 6.5, 0.25, 127, 0],
-[42, 7., 0.25, 127, 0],
-[42, 7.5, 0.25, 127, 0],
-[42, 8., 0.25, 127, 0],
-[42, 8.5, 0.25, 127, 0],
-[42, 9., 0.25, 127, 0],
-[42, 9.5, 0.25, 127, 0],
-[42, 10., 0.25, 127, 0],
-[42, 10.5, 0.25, 127, 0],
-[42, 11., 0.25, 127, 0],
-[42, 11.5, 0.25, 127, 0],
-[42, 12., 0.25, 127, 0],
-[42, 12.5, 0.25, 127, 0],
-[42, 13., 0.25, 127, 0],
-[42, 13.5, 0.25, 127, 0],
-[42, 14., 0.25, 127, 0],
-[42, 14.5, 0.25, 127, 0],
-[42, 15., 0.25, 127, 0],
-[42, 15.5, 0.25, 127, 0]];
-exports.test_input = test_input;
+// const test_input = [[36, 0., 0.25, 127, 0],
+// [36, 2., 0.25, 127, 0],
+// [36, 4., 0.25, 127, 0],
+// [36, 6., 0.25, 127, 0],
+// [36, 8., 0.25, 127, 0],
+// [36, 10., 0.25, 127, 0],
+// [36, 12., 0.25, 127, 0],
+// [36, 14., 0.25, 127, 0],
+// [38, 1., 0.25, 127, 0],
+// [38, 3., 0.25, 127, 0],
+// [38, 5., 0.25, 127, 0],
+// [38, 7., 0.25, 127, 0],
+// [38, 9., 0.25, 127, 0],
+// [38, 11., 0.25, 127, 0],
+// [38, 13., 0.25, 127, 0],
+// [38, 15., 0.25, 127, 0],
+// [42, 0., 0.25, 127, 0],
+// [42, 0.5, 0.25, 127, 0],
+// [42, 1., 0.25, 127, 0],
+// [42, 1.5, 0.25, 127, 0],
+// [42, 2., 0.25, 127, 0],
+// [42, 2.5, 0.25, 127, 0],
+// [42, 3., 0.25, 127, 0],
+// [42, 3.5, 0.25, 127, 0],
+// [42, 4., 0.25, 127, 0],
+// [42, 4.5, 0.25, 127, 0],
+// [42, 5., 0.25, 127, 0],
+// [42, 5.5, 0.25, 127, 0],
+// [42, 6., 0.25, 127, 0],
+// [42, 6.5, 0.25, 127, 0],
+// [42, 7., 0.25, 127, 0],
+// [42, 7.5, 0.25, 127, 0],
+// [42, 8., 0.25, 127, 0],
+// [42, 8.5, 0.25, 127, 0],
+// [42, 9., 0.25, 127, 0],
+// [42, 9.5, 0.25, 127, 0],
+// [42, 10., 0.25, 127, 0],
+// [42, 10.5, 0.25, 127, 0],
+// [42, 11., 0.25, 127, 0],
+// [42, 11.5, 0.25, 127, 0],
+// [42, 12., 0.25, 127, 0],
+// [42, 12.5, 0.25, 127, 0],
+// [42, 13., 0.25, 127, 0],
+// [42, 13.5, 0.25, 127, 0],
+// [42, 14., 0.25, 127, 0],
+// [42, 14.5, 0.25, 127, 0],
+// [42, 15., 0.25, 127, 0],
+// [42, 15.5, 0.25, 127, 0]];
+// exports.test_input = test_input;
 
