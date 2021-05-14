@@ -6,6 +6,7 @@ const { assert } = require('console');
 const constants = require('./constants.js');
 const utils = require('./utils.js');
 const { util } = require('@tensorflow/tfjs-node');
+const { Midi } = require('@tonejs/midi'); // https://github.com/Tonejs/Midi
 
 const UNIQUE_DRUM_VALUES = constants.UNIQUE_DRUM_VALUES;
 const NUM_UNIQUE_DRUM_VALUES = UNIQUE_DRUM_VALUES.length;
@@ -133,8 +134,6 @@ Max.addHandler("generate", ()=>{
     generateBassline();
 });
 
-
-
 // Start encoding... reset input matrix
 var input_onset;
 Max.addHandler("encode_start", (is_test) =>  {
@@ -184,4 +183,110 @@ Max.addHandler("encode_done", () =>  {
     // var inputOn     = tf.tensor2d(input_onset, [NUM_STEPS, NUM_DRUM_CLASSES]);
     // output encoded z vector
     generateBassline(drum_array);
+});
+
+
+
+
+
+function isValidMIDIFile(midiFile){
+    if (midiFile.header.tempos.length > 1){
+        utils.error("not compatible with midi files containing multiple tempo changes")
+        return false;
+    }
+    return true;
+}
+
+function getTempo(midiFile){
+    if (midiFile.header.tempos.length == 0) return 120.0 // no tempo info, then use 120.0 
+    return midiFile.header.tempos[0].bpm;  // use the first tempo info and ignore tempo changes in MIDI file
+}
+
+// Get location of a note in pianoroll
+function getNoteIndexAndTimeshift(note, tempo){
+    var unit = 0.25; // 1.0 = quarter note   grid size = 16th note 
+    const half_unit = unit * 0.5;
+
+    const index = Math.max(0, Math.floor((note.time + half_unit) / unit)) // centering 
+    const timeshift = (note.time - unit * index)/half_unit; // normalized
+
+    return [index, timeshift];
+}
+
+
+// Convert midi into pianoroll matrix
+function processPianoroll(midiFile, midi_map){
+    const tempo = getTempo(midiFile);
+
+    let drum_input = utils.create2DArray(NUM_STEPS, NUM_DRUM_CLASSES);
+
+    midiFile.tracks.forEach(track => {
+    
+        //notes are an array
+        const notes = track.notes
+        notes.forEach(note => {
+            if ((note.midi in midi_map)){
+
+                let timing = getNoteIndexAndTimeshift(note, tempo);
+                let index = timing[0];
+                
+                if (index < NUM_STEPS){
+                    let drum_id = midi_map[note.midi];
+                    Max.post("pitch", note.midi, drum_id);
+                    drum_input[index][drum_id]     = 1;
+                } 
+            }
+        })
+    })
+
+    /*    for debug - output pianoroll */
+    // if (velocities.length > 0){ 
+    //     var index = utils.getRandomInt(velocities.length); 
+    //     let x = velocities[index];
+    //     for (var i=0; i< NUM_DRUM_CLASSES; i++){
+    //         for (var j=0; j < LOOP_DURATION; j++){
+    //             Max.outlet("matrix_output", j, i, Math.ceil(x[i][j]));
+    //         }
+    //     }
+    // }
+
+    return drum_input;
+}
+
+Max.addHandler("encode_midi", (filename) => {
+    utils.post("encode_midi", filename);
+
+    // // Read MIDI file into a buffer
+    var input = fs.readFileSync(filename)
+
+    var midiFile = new Midi(input);  
+    if (isValidMIDIFile(midiFile) == false){
+        utils.error("Invalid MIDI file: " + filename);
+        return false;
+    }
+
+    // select mapping
+    let midi_map = constants.MAGENTA_MIDI_MAP;
+
+    // process midifile
+    let drum_input = processPianoroll(midiFile, midi_map);
+    utils.post(drum_input);
+    
+    let drum_array = [];
+    for (let i=0; i < NUM_STEPS; i++){
+        let step_onset = []; // onsets in the step
+        for (let j=0; j < NUM_DRUM_CLASSES; j++){
+            if (drum_input[i][j] > 0) step_onset.push(j);
+        }
+        let drumComboId = constants.getDrumComboId(step_onset);
+        drum_array.push(drumComboId);
+        utils.post("step/drumcombo", step_onset, drumComboId);
+        console.log("step/drumcombo", step_onset, drumComboId);
+    }
+    
+    // // Encoding!
+    // var inputOn     = tf.tensor2d(input_onset, [NUM_STEPS, NUM_DRUM_CLASSES]);
+    // output encoded z vector
+    generateBassline(drum_array);
+    return true;
 });

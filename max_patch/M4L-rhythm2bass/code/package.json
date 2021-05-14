@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@tensorflow/tfjs-node": "^3.3.0",
+    "@tonejs/midi": "^2.0.25",
     "glob": "^7.1.6",
     "path": "^0.12.7"
   },

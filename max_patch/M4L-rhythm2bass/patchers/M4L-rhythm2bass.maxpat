@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 8,
+			"revision" : 10,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 507.0, 113.0, 1807.0, 1044.0 ],
+		"rect" : [ 38.0, 314.0, 1807.0, 1044.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,77 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-5",
+					"maxclass" : "live.button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"parameter_enable" : 1,
+					"patching_rect" : [ 408.98541259765625, 213.375, 22.0, 22.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 680.04127037525177, 92.423585070310708, 27.0, 27.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_enum" : [ "off", "on" ],
+							"parameter_longname" : "live.button[3]",
+							"parameter_mmax" : 1,
+							"parameter_shortname" : "live.button[2]",
+							"parameter_type" : 2
+						}
+
+					}
+,
+					"varname" : "live.button[1]"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Ableton Sans Light",
+					"fontsize" : 8.0,
+					"id" : "obj-6",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 443.5, 213.375, 62.0, 28.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 645.04127037525177, 123.923585070310708, 76.0, 18.0 ],
+					"text" : "/tmp/oldskool.mid"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"activebgoncolor" : [ 1.0, 0.984313725490196, 0.427450980392157, 1.0 ],
+					"id" : "obj-9",
+					"ignoreclick" : 1,
+					"maxclass" : "live.button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"parameter_enable" : 1,
+					"patching_rect" : [ 371.75, 213.375, 29.23541259765625, 27.425958415212676 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 709.04127037525177, 107.423585070310708, 12.0, 12.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_enum" : [ "off", "on" ],
+							"parameter_longname" : "live.button[5]",
+							"parameter_mmax" : 1,
+							"parameter_shortname" : "live.button[1]",
+							"parameter_type" : 2
+						}
+
+					}
+,
+					"varname" : "live.button[3]"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Ableton Sans Light",
 					"fontsize" : 9.0,
@@ -370,7 +441,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 8,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -416,7 +487,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 8,
+											"revision" : 10,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -635,7 +706,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 8,
+											"revision" : 10,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -854,7 +925,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 8,
+											"revision" : 10,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1084,7 +1155,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 8,
+											"revision" : 10,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1167,7 +1238,7 @@
 														"appversion" : 														{
 															"major" : 8,
 															"minor" : 1,
-															"revision" : 8,
+															"revision" : 10,
 															"architecture" : "x64",
 															"modernui" : 1
 														}
@@ -2070,20 +2141,20 @@
 					"id" : "obj-171",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "" ],
 					"patcher" : 					{
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 8,
+							"revision" : 10,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 59.0, 104.0, 950.0, 937.0 ],
+						"rect" : [ 890.0, 387.0, 1013.0, 937.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2112,6 +2183,101 @@
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-45",
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 786.0, 653.0, 102.0, 22.0 ],
+									"text" : "/tmp/oldskool.mid"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-9",
+									"maxclass" : "button",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 890.0, 616.0, 24.0, 24.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-26",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 980.0, 705.0, 92.0, 22.0 ],
+									"text" : "s ---node_script"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-25",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 980.0, 656.0, 124.0, 22.0 ],
+									"text" : "prepend encode_midi"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"comment" : "",
+									"id" : "obj-24",
+									"index" : 3,
+									"maxclass" : "outlet",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 1142.5, 728.0, 30.0, 30.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"comment" : "",
+									"id" : "obj-27",
+									"index" : 2,
+									"maxclass" : "outlet",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 928.5, 728.0, 30.0, 30.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-41",
+									"maxclass" : "newobj",
+									"numinlets" : 3,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "" ],
+									"patching_rect" : [ 928.5, 585.0, 122.0, 22.0 ],
+									"text" : "route /heartbeat /midi"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-43",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 928.5, 540.0, 104.0, 22.0 ],
+									"text" : "udpreceive 10091"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-20",
 									"maxclass" : "newobj",
@@ -2645,6 +2811,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-26", 0 ],
+									"source" : [ "obj-25", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-21", 0 ],
 									"source" : [ "obj-28", 0 ]
 								}
@@ -2749,6 +2922,61 @@
 								"patchline" : 								{
 									"destination" : [ "obj-32", 0 ],
 									"source" : [ "obj-4", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-24", 0 ],
+									"order" : 0,
+									"source" : [ "obj-41", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-25", 0 ],
+									"order" : 1,
+									"source" : [ "obj-41", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-27", 0 ],
+									"source" : [ "obj-41", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-41", 0 ],
+									"order" : 0,
+									"source" : [ "obj-43", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-9", 0 ],
+									"order" : 1,
+									"source" : [ "obj-43", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-24", 0 ],
+									"order" : 0,
+									"source" : [ "obj-45", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-25", 0 ],
+									"order" : 1,
+									"source" : [ "obj-45", 0 ]
 								}
 
 							}
@@ -2903,8 +3131,6 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
-						"node_bin_path" : "",
-						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -2942,7 +3168,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 1321.373789548873901, 440.766988813877106, 128.0, 128.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 158.223475098609924, -0.023439503725825, 508.908897638320923, 168.0 ],
+					"presentation_rect" : [ 158.223475098609924, -0.023439503725825, 570.908897638320923, 168.0 ],
 					"proportion" : 0.5,
 					"rounded" : 15
 				}
@@ -2983,6 +3209,29 @@
 					"destination" : [ "obj-43", 0 ],
 					"midpoints" : [ 919.873789548873901, 558.766988813877106, 898.373789548873901, 558.766988813877106 ],
 					"source" : [ "obj-17", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-5", 0 ],
+					"order" : 1,
+					"source" : [ "obj-171", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-6", 1 ],
+					"order" : 0,
+					"source" : [ "obj-171", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-9", 0 ],
+					"source" : [ "obj-171", 1 ]
 				}
 
 			}
@@ -3226,7 +3475,9 @@
 			"obj-25" : [ "live.menu[3]", "live.menu", 0 ],
 			"obj-35" : [ "shuffle", "shuffle", 0 ],
 			"obj-43" : [ "live.step", "live.step", 0 ],
+			"obj-5" : [ "live.button[3]", "live.button[2]", 0 ],
 			"obj-69" : [ "live.tab", "live.tab", 0 ],
+			"obj-9" : [ "live.button[5]", "live.button[1]", 0 ],
 			"obj-97" : [ "duration_ratio", "duration", 0 ],
 			"parameterbanks" : 			{
 
@@ -3237,7 +3488,7 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "rhythm2bass.js",
-				"bootpath" : "~/git/rhythm2bass/max_patch/M4L-rhythm2bass/code",
+				"bootpath" : "~/Dropbox (Qosmo)/My Mac (NaoのiMac)/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/code",
 				"patcherrelativepath" : "../code",
 				"type" : "TEXT",
 				"implicit" : 1
@@ -3262,14 +3513,14 @@
 			}
 , 			{
 				"name" : "shuffle_metro.maxpat",
-				"bootpath" : "~/git/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Dropbox (Qosmo)/My Mac (NaoのiMac)/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "count_for_me.maxpat",
-				"bootpath" : "~/git/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Dropbox (Qosmo)/My Mac (NaoのiMac)/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
 				"implicit" : 1
@@ -3282,14 +3533,14 @@
 			}
 , 			{
 				"name" : "makenote_for_me.maxpat",
-				"bootpath" : "~/git/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Dropbox (Qosmo)/My Mac (NaoのiMac)/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "setup_1_16.maxpat",
-				"bootpath" : "~/git/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Dropbox (Qosmo)/My Mac (NaoのiMac)/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
 				"implicit" : 1
