@@ -257,7 +257,12 @@ Max.addHandler("encode_midi", (filename) => {
     utils.post("encode_midi", filename);
 
     // // Read MIDI file into a buffer
-    var input = fs.readFileSync(filename)
+	try {
+    	var input = fs.readFileSync(filename);
+	} catch(e) {
+		utils.post( "encode_midi error", e.message );
+		return; 
+	}
 
     var midiFile = new Midi(input);  
     if (isValidMIDIFile(midiFile) == false){
