@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 10,
+			"revision" : 8,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 38.0, 314.0, 1807.0, 1044.0 ],
+		"rect" : [ 215.0, 79.0, 1807.0, 1044.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -77,7 +77,7 @@
 					"patching_rect" : [ 443.5, 213.375, 62.0, 28.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 645.04127037525177, 123.923585070310708, 76.0, 18.0 ],
-					"text" : "/tmp/oldskool.mid"
+					"text" : "/tmp/424_rec.mid"
 				}
 
 			}
@@ -326,6 +326,7 @@
 					"id" : "obj-43",
 					"loopruler" : 0,
 					"maxclass" : "live.step",
+					"mode" : 2,
 					"numinlets" : 1,
 					"numoutlets" : 5,
 					"outlettype" : [ "", "", "", "", "" ],
@@ -441,7 +442,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 8,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -487,7 +488,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 8,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -706,7 +707,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 8,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -925,7 +926,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 8,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1155,7 +1156,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 8,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1238,7 +1239,7 @@
 														"appversion" : 														{
 															"major" : 8,
 															"minor" : 1,
-															"revision" : 10,
+															"revision" : 8,
 															"architecture" : "x64",
 															"modernui" : 1
 														}
@@ -2148,13 +2149,13 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 8,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 890.0, 387.0, 1013.0, 937.0 ],
+						"rect" : [ 821.0, 200.0, 1013.0, 937.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -2189,8 +2190,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 786.0, 653.0, 102.0, 22.0 ],
-									"text" : "/tmp/oldskool.mid"
+									"patching_rect" : [ 786.0, 653.0, 101.0, 22.0 ],
+									"text" : "/tmp/424_rec.mid"
 								}
 
 							}
@@ -3131,6 +3132,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -3488,7 +3491,7 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "rhythm2bass.js",
-				"bootpath" : "~/Dropbox (Qosmo)/My Mac (NaoのiMac)/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/code",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/code",
 				"patcherrelativepath" : "../code",
 				"type" : "TEXT",
 				"implicit" : 1
@@ -3513,14 +3516,14 @@
 			}
 , 			{
 				"name" : "shuffle_metro.maxpat",
-				"bootpath" : "~/Dropbox (Qosmo)/My Mac (NaoのiMac)/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "count_for_me.maxpat",
-				"bootpath" : "~/Dropbox (Qosmo)/My Mac (NaoのiMac)/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
 				"implicit" : 1
@@ -3533,14 +3536,14 @@
 			}
 , 			{
 				"name" : "makenote_for_me.maxpat",
-				"bootpath" : "~/Dropbox (Qosmo)/My Mac (NaoのiMac)/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "setup_1_16.maxpat",
-				"bootpath" : "~/Dropbox (Qosmo)/My Mac (NaoのiMac)/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
 				"implicit" : 1
