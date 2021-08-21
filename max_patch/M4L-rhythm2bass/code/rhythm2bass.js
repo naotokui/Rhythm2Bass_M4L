@@ -57,17 +57,16 @@ function drumArrayToMatrix(input){
 async function generateBassline(drum_array){
 
     if (drum_array == null){
+        utils.post("empty/null drum array?");
         drum_array =[ 6,  0,  0,  0,  0,  0,  0,  0, 34,  0,  0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0,  0,  0,
                     34,  0,  0,  0,  0,  0,  0,  0,  6,  0,  0,  0,  0,  0,  0,  0, 34,  0,  0,  0,  0,  0,  0,  0,
                     6, 0,  0,  0,  0,  0,  0,  0, 34,  0,  0,  0,  0,  0,  0,  0];
     }
-    utils.post(drum_array);
     let input_matrix = drumArrayToMatrix(drum_array);
     
     // Encode input drum pattern
     let input = tf.tensor2d(input_matrix, [NUM_STEPS, NUM_UNIQUE_DRUM_VALUES])
     input = tf.reshape(input_matrix, [1, NUM_STEPS, NUM_UNIQUE_DRUM_VALUES])
-    console.log(input);
     let state = encoder.predict(input);
 
     // Empty input bassline
@@ -99,25 +98,38 @@ async function generateBassline(drum_array){
         let pitch = output[i];
         
         // how long this onset should long
-        let duration_count = 1; 
+        let duration_count = 1;
+        let is_new_onset = true;
         if (isBassOnset(pitch)){
             for (let j=i+1; j <NUM_STEPS; j++){
                 let new_pitch = output[j];
                 // note off or note-on of other pitch
-                if (isBassOnset(new_pitch) || new_pitch == NOTEOFF_PITCH_BASS) break;
-                duration_count++;
+                if (!isBassOnset(new_pitch) || new_pitch == NOTEOFF_PITCH_BASS) break;
+                if (new_pitch == pitch) duration_count++;
+                else break;
             }
-            // normalize duration to 0 - 127
-            let duration = Math.floor((duration_count * 8))
-            pitch_sequence.push(pitch + MIN_PITCH_BASS)
-            velocity_sequence.push(100);
-            duration_sequence.push(duration);
+            if (i > 0){
+                let prev_pitch = output[i - 1];
+                if (prev_pitch == pitch) is_new_onset = false;                
+            }
+            if (is_new_onset){
+                // normalize duration to 0 - 127
+                let duration = Math.floor((duration_count * 8))
+                pitch_sequence.push(pitch + MIN_PITCH_BASS)
+                velocity_sequence.push(100);  // constant value
+                duration_sequence.push(duration);
+            } else {
+                pitch_sequence.push(0)
+                velocity_sequence.push(0);
+                duration_sequence.push(0);
+            }
         } else{
             pitch_sequence.push(0)
             velocity_sequence.push(0);
             duration_sequence.push(0);
         }    
     }
+    assert(pitch_sequence.length == NUM_STEPS && velocity_sequence.length == NUM_STEPS && duration_sequence.length == NUM_STEPS)
 
     Max.outlet("pitch_output", 1, pitch_sequence.join(" "));
     Max.outlet("velocity_output", 1, velocity_sequence.join(" "));
@@ -175,8 +187,7 @@ Max.addHandler("encode_done", () =>  {
         }
         let drumComboId = constants.getDrumComboId(step_onset);
         drum_array.push(drumComboId);
-        utils.post("step/drumcombo", step_onset, drumComboId);
-        console.log("step/drumcombo", step_onset, drumComboId);
+        // console.log("step/drumcombo", step_onset, drumComboId);
     }
     
     // // Encoding!
@@ -184,9 +195,6 @@ Max.addHandler("encode_done", () =>  {
     // output encoded z vector
     generateBassline(drum_array);
 });
-
-
-
 
 
 function isValidMIDIFile(midiFile){
