@@ -293,8 +293,7 @@ Max.addHandler("encode_midi", (filename) => {
         }
         let drumComboId = constants.getDrumComboId(step_onset);
         drum_array.push(drumComboId);
-        utils.post("step/drumcombo", step_onset, drumComboId);
-        console.log("step/drumcombo", step_onset, drumComboId);
+        // console.log("step/drumcombo", step_onset, drumComboId);
     }
     
     // // Encoding!
