@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 320.0, 87.0, 1028.0, 1044.0 ],
+		"rect" : [ 320.0, 87.0, 1908.0, 1271.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,56 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Ableton Sans Light",
+					"fontsize" : 10.0,
+					"id" : "obj-22",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 786.5, 565.766988813877106, 60.0, 18.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 598.5, -0.023439503725825, 51.0, 18.0 ],
+					"text" : "# of steps",
+					"textcolor" : [ 0.67843137254902, 0.67843137254902, 0.67843137254902, 1.0 ],
+					"textjustification" : 1
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"activebgcolor" : [ 0.310923963785172, 0.310971558094025, 0.310901194810867, 1.0 ],
+					"activebgoncolor" : [ 0.915970146656036, 0.395096808671951, 0.410995662212372, 1.0 ],
+					"fontname" : "Ableton Sans Light",
+					"id" : "obj-5",
+					"maxclass" : "live.tab",
+					"num_lines_patching" : 1,
+					"num_lines_presentation" : 1,
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "", "", "float" ],
+					"parameter_enable" : 1,
+					"patching_rect" : [ 685.0, 565.766988813877106, 100.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 651.5, -0.023439503725825, 66.0, 18.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_enum" : [ "64", "32" ],
+							"parameter_longname" : "live.tab[1]",
+							"parameter_mmax" : 1,
+							"parameter_shortname" : "live.tab",
+							"parameter_type" : 2,
+							"parameter_unitstyle" : 9
+						}
+
+					}
+,
+					"textcolor" : [ 0.67843137254902, 0.67843137254902, 0.67843137254902, 1.0 ],
+					"varname" : "live.tab[1]"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Ableton Sans Light",
 					"fontsize" : 10.0,
@@ -820,7 +870,6 @@
 					"id" : "obj-43",
 					"loopruler" : 0,
 					"maxclass" : "live.step",
-					"mode" : 2,
 					"numinlets" : 1,
 					"numoutlets" : 5,
 					"outlettype" : [ "", "", "", "", "" ],
@@ -2442,7 +2491,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 592.5, 601.01458740234375, 105.0, 20.0 ],
+					"patching_rect" : [ 558.5, 648.5, 105.0, 20.0 ],
 					"text" : "reset every 2 bars"
 				}
 
@@ -2494,10 +2543,10 @@
 				"box" : 				{
 					"id" : "obj-11",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 3,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 493.5, 614.0, 99.0, 22.0 ],
+					"patching_rect" : [ 493.5, 621.5, 99.0, 22.0 ],
 					"text" : "count_for_me 64"
 				}
 
@@ -3515,7 +3564,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 42.105235338211287, 97.310680210590363, 64.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 661.54127037525177, 7.476560496274175, 64.0, 22.0 ],
+					"presentation_rect" : [ 661.733011186122894, 138.80707947724926, 64.0, 22.0 ],
 					"text" : "script start"
 				}
 
@@ -3587,6 +3636,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -3671,7 +3722,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-11", 1 ],
-					"midpoints" : [ 682.5, 606.128646850585938, 583.0, 606.128646850585938 ],
+					"midpoints" : [ 682.5, 606.128646850585938, 543.0, 606.128646850585938 ],
 					"source" : [ "obj-172", 0 ]
 				}
 
@@ -3942,6 +3993,14 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-11", 2 ],
+					"midpoints" : [ 735.0, 614.133494406938553, 583.0, 614.133494406938553 ],
+					"source" : [ "obj-5", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-12", 0 ],
 					"source" : [ "obj-50", 2 ]
 				}
@@ -4186,6 +4245,7 @@
 			"obj-25" : [ "live.menu[3]", "live.menu", 0 ],
 			"obj-35" : [ "shuffle", "shuffle", 0 ],
 			"obj-43" : [ "live.step", "live.step", 0 ],
+			"obj-5" : [ "live.tab[1]", "live.tab", 0 ],
 			"obj-69" : [ "live.tab", "live.tab", 0 ],
 			"obj-97" : [ "duration_ratio", "duration", 0 ],
 			"parameterbanks" : 			{
