@@ -54,7 +54,14 @@ function drumArrayToMatrix(input){
     return matrix;
 }
 
-async function generateBassline(drum_array){
+function sample(probs, temperature) {
+    return tf.tidy(() => {
+      const logPreds = tf.div(tf.log(probs), Math.max(temperature, 1e-6));
+      return tf.multinomial(logPreds, 1).dataSync()[0];
+    });
+}
+
+async function generateBassline(drum_array, temperature){
 
     if (drum_array == null){
         utils.post("empty/null drum array?");
@@ -76,9 +83,11 @@ async function generateBassline(drum_array){
     for (let i = 0; i < NUM_STEPS; i++){
         let decoder_output = decoder.predict([target_seq, state[0], state[1]]);
         let yhat = decoder_output[0];
-        
-        let bass_value = tf.argMax(yhat, axis=2);
-        output.push(Number(bass_value.dataSync()));
+    
+        let max_bass_value = tf.argMax(yhat, axis=2);
+        let bass_value = sample(tf.squeeze(yhat), temperature);
+        console.log(max_bass_value.dataSync(), bass_value);
+        output.push(Number(bass_value));
 
         // # update state
         state = [decoder_output[1], decoder_output[2]];
@@ -261,7 +270,7 @@ function processPianoroll(midiFile, midi_map){
     return drum_input;
 }
 
-Max.addHandler("encode_midi", (filename) => {
+Max.addHandler("encode_midi", (filename, temperature = 0.1) => {
     utils.post("encode_midi", filename);
 
     // // Read MIDI file into a buffer
@@ -299,6 +308,6 @@ Max.addHandler("encode_midi", (filename) => {
     // // Encoding!
     // var inputOn     = tf.tensor2d(input_onset, [NUM_STEPS, NUM_DRUM_CLASSES]);
     // output encoded z vector
-    generateBassline(drum_array);
+    generateBassline(drum_array, temperature);
     return true;
 });
