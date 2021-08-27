@@ -1,10 +1,10 @@
 #%%
 
-import seq2seq_LSTM
+#import seq2seq_LSTM
 from keras.models import load_model
 from keras.utils.vis_utils import plot_model
 from keras.utils.vis_utils import model_to_dot
-from keras.utils import to_categorical
+from keras.utils.np_utils import to_categorical
 from IPython.display import SVG
 
 %pylab inline
@@ -12,23 +12,13 @@ from IPython.display import SVG
 #%%
 
 # Constants
-BASS_PADDING = 63 # end of sequence
-
-#%%
-import keras
-import tensorflow as tf 
-
-print(keras.__version__)
-print(tf.__version__)
-
-tf.Session()
-
-
+BASS_PADDING = 63 # end of sequence 
 
 #%%
 import numpy as np
 
-data = np.load("../../data/tv_themes__magenta__min_pitch_24__max_pitch_84__q_note_res_4__infer_chords_True__n_bars_4__max_cont_rests_16__max_N_inf.npz", allow_pickle=True)
+# load preprocessed music data
+data = np.load("../data/tv_themes__magenta__min_pitch_24__max_pitch_84__q_note_res_4__infer_chords_True__n_bars_4__max_cont_rests_16__max_N_inf.npz", allow_pickle=True)
 triplets = data['triplets']
 len(triplets)
 # %%
@@ -48,20 +38,25 @@ bassline = np.array(bassline)
 drums = np.array(drums)
 
 print(bassline.shape, drums.shape)
-# %%
 
+# %% 
+# save data
 np.savez("../data/tv_thems_bassline_drums_only.npz", bassline=bassline, drums=drums)
 # %%
 
+# load stored data
 bassline = np.load("../data/tv_thems_bassline_drums_only.npz")['bassline']
 drums = np.load("../data/tv_thems_bassline_drums_only.npz")['drums']
 print(bassline.shape, drums.shape)
 
 #%%
-
+# print sample data
 print(drums[340])
+print(bassline[340])
+
 # %%
 
+# Finde unique tokens 
 unique_bass = np.unique(bassline)
 unique_bass = np.append(unique_bass, BASS_PADDING)
 num_output = len(unique_bass) # output dimention
@@ -70,6 +65,9 @@ print(unique_bass, num_output)
 unique_drums = np.unique(drums)
 num_input = len(unique_drums) # input dimention
 print(unique_drums, num_input)
+
+print("num_input: ", num_input)
+print("num_output: ", num_output)
 
 
 # %%
@@ -93,12 +91,16 @@ def get_input_bassline(seqs):
     return np.array(output)
 
 
-bassline_input = get_input_bassline(bassline)
-bassline_input_mapped = convert_sequence(bassline_input, unique_bass) # reversed sequence
 bassline_mapped = convert_sequence(bassline, unique_bass)
+bassline_input = get_input_bassline(bassline) # reversed sequence
+bassline_input_mapped = convert_sequence(bassline_input, unique_bass) 
 drums_mapped = convert_sequence(drums, unique_drums)
 print(bassline_mapped.shape, drums_mapped.shape)
 
+#%%
+
+print(bassline[0])
+print(bassline_input[0])
 
 # %%
 import os
@@ -189,9 +191,6 @@ print(drum_input.shape)
 # output = list()
 
 #%%
-
-drum_input
-
 
 # %%
 def generate_bassline(drum_input):
