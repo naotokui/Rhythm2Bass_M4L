@@ -1,19 +1,15 @@
-# rhythm2bass
+# M4L.Rhythm2Bass
+
+M4L.Rhythm2Bass: Ableton Live Max for Live Device for translating drum patterns into basslines. The device uses a seq-to-seq model, normally used for language translation tasks, trained on house music MIDI files containing both drum and bass tracks.
+
+The basic assumption behind this device is the following: A drum pattern and its corresponding bass line, they are speaking the same rhythmical concept in two different languages.
+
+<img src="./images/translation_rhythm2bass.png" width="768px">
 
 
-[ 6  0  0  0  0  0  0  0 34  0  0  0  0  0  0  0  6  0  0  0  0  0  0  0
- 34  0  0  0  0  0  0  0  6  0  0  0  0  0  0  0 34  0  0  0  0  0  0  0
-  6  0  0  0  0  0  0  0 34  0  0  0  0  0  0  0]
 
 
-[11  3 18 18 11  3 18 18 11  3 18 18 11  3 18 18 11  3 18 18 11  3 18 18
- 11  3 18 18 11  3 18 19 11  3 18 18 11  3 18 18 11  3 18 18 11  3 18 18
- 11  3 18 18 11  3 18 18 11  3 18 18 11  3 18 19]
-
- [  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
-  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35
-  36  37  38  39  40  42  44  45  46  47  48  49  50  51  52  53  54  55
-  56  57  58  60  61  62  63  65  66  67  71  73  74  75  76  77  78  79
-  81  83  84  86  87  93  94  98  99 100 101 103 104 105 106 109 115 130
- 131 132 133 134 135 139 140 142 154 161 165 175 179 180 189 191 196 199
- 200 215 253 260 304 323 359 414 415]
+Reference:
+```
+Behzad Haki, & Jorda, S. (2019). A Bassline Generation System Based on Sequence-to-Sequence Learning. Proceedings of the International Conference on New Interfaces for Musical Expression, 204–209. 
+```
