@@ -103,6 +103,7 @@ async function generateBassline(drum_array, temperature){
     var duration_sequence = [];
 
     // output to max sequencer
+    let onset_count = 0;
     for (let i=0; i< NUM_STEPS; i++){
         let pitch = output[i];
         
@@ -127,6 +128,7 @@ async function generateBassline(drum_array, temperature){
                 pitch_sequence.push(pitch + MIN_PITCH_BASS)
                 velocity_sequence.push(100);  // constant value
                 duration_sequence.push(duration);
+                onset_count += 1; // count onsets
             } else {
                 pitch_sequence.push(0)
                 velocity_sequence.push(0);
@@ -143,6 +145,21 @@ async function generateBassline(drum_array, temperature){
     Max.outlet("pitch_output", 1, pitch_sequence.join(" "));
     Max.outlet("velocity_output", 1, velocity_sequence.join(" "));
     Max.outlet("duration_output", 1, duration_sequence.join(" "));
+
+    // Live Clip
+    Max.outlet("clip_start", 1);
+    Max.outlet("clip_num_onsets", onset_count);
+    for (var i=0; i< NUM_STEPS / 2; i++){
+        let pitch = pitch_sequence[i];
+        if (pitch > 0){
+            let velocity = velocity_sequence[i];
+            let duration = duration_sequence[i] / 127. * 4.0;
+            let time = i * (1.0/4.0);
+            Max.outlet("clip_add_note", pitch, time, duration, velocity, 0);
+        }
+    }
+    Max.outlet("clip_done", 1);
+
     Max.outlet("generated", 1); 
 }
 

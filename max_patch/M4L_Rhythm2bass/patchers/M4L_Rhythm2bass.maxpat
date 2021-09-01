@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 10,
+			"revision" : 8,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 239.0, 206.0, 1889.0, 1023.0 ],
+		"rect" : [ 159.0, 143.0, 1110.0, 1023.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,83 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-53",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 261.0, 890.0, 50.0, 35.0 ],
+					"text" : "generated 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-19",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 190.0, 73.0, 357.0, 22.0 ],
+					"text" : "script npm rebuild @tensorflow/tfjs-node build-addon-from-source"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-10",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 42.0, 293.766988813877106, 65.0, 22.0 ],
+					"text" : "s ---to_clip"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-237",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 132.0, 842.0, 97.0, 22.0 ],
+					"saved_object_attributes" : 					{
+						"filename" : "clip-creation.js",
+						"parameter_enable" : 0
+					}
+,
+					"text" : "js clip-creation.js"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-230",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 132.0, 715.0, 63.0, 22.0 ],
+					"text" : "r ---to_clip"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-220",
+					"maxclass" : "newobj",
+					"numinlets" : 5,
+					"numoutlets" : 5,
+					"outlettype" : [ "", "", "", "", "" ],
+					"patching_rect" : [ 132.0, 751.0, 339.0, 22.0 ],
+					"text" : "routepass clip_start clip_num_onsets clip_add_note clip_done"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"id" : "obj-54",
 					"maxclass" : "live.button",
@@ -303,7 +380,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 8,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -780,7 +857,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 931.176421165466309, 366.0, 100.605263233184814, 18.0 ],
-					"text" : "/tmp/3020_rec2.mid"
+					"text" : "/tmp/226_rec3.mid"
 				}
 
 			}
@@ -902,6 +979,7 @@
 					"id" : "obj-43",
 					"loopruler" : 0,
 					"maxclass" : "live.step",
+					"mode" : 2,
 					"numinlets" : 1,
 					"numoutlets" : 5,
 					"outlettype" : [ "", "", "", "", "" ],
@@ -1002,7 +1080,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 8,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1048,7 +1126,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 8,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1267,7 +1345,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 8,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1486,7 +1564,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 8,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1716,7 +1794,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 8,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1799,7 +1877,7 @@
 														"appversion" : 														{
 															"major" : 8,
 															"minor" : 1,
-															"revision" : 10,
+															"revision" : 8,
 															"architecture" : "x64",
 															"modernui" : 1
 														}
@@ -2659,7 +2737,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 8,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3642,6 +3720,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 1,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -3734,6 +3814,13 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-27", 0 ],
+					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-27", 0 ],
 					"source" : [ "obj-2", 0 ]
 				}
 
@@ -3754,6 +3841,34 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-237", 0 ],
+					"source" : [ "obj-220", 3 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-237", 0 ],
+					"source" : [ "obj-220", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-237", 0 ],
+					"source" : [ "obj-220", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-237", 0 ],
+					"source" : [ "obj-220", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-62", 1 ],
 					"source" : [ "obj-23", 1 ]
 				}
@@ -3763,6 +3878,22 @@
 				"patchline" : 				{
 					"destination" : [ "obj-62", 0 ],
 					"source" : [ "obj-23", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-220", 0 ],
+					"order" : 1,
+					"source" : [ "obj-230", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-53", 1 ],
+					"order" : 0,
+					"source" : [ "obj-230", 0 ]
 				}
 
 			}
@@ -3782,6 +3913,14 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
+					"order" : 1,
+					"source" : [ "obj-27", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
 					"source" : [ "obj-27", 1 ]
 				}
@@ -3790,6 +3929,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-49", 0 ],
+					"order" : 0,
 					"source" : [ "obj-27", 0 ]
 				}
 
@@ -4305,7 +4445,7 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "rhythm2bass.js",
-				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/code",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L_Rhythm2bass/code",
 				"patcherrelativepath" : "../code",
 				"type" : "TEXT",
 				"implicit" : 1
@@ -4330,14 +4470,14 @@
 			}
 , 			{
 				"name" : "shuffle_metro.maxpat",
-				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L_Rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "count_for_me.maxpat",
-				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L_Rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
 				"implicit" : 1
@@ -4350,16 +4490,23 @@
 			}
 , 			{
 				"name" : "makenote_for_me.maxpat",
-				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L_Rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "setup_1_16.maxpat",
-				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L_Rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "clip-creation.js",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L_Rhythm2bass/code",
+				"patcherrelativepath" : "../code",
+				"type" : "TEXT",
 				"implicit" : 1
 			}
  ],
