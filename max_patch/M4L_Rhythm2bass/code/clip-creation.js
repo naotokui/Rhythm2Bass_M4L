@@ -10,8 +10,12 @@ function setup(){
 
 function clip_start(dummy){
 	clip = new LiveAPI(this.patcher, "this_device", "canonical_parent", "clip_slots", 0, "clip");
-//	clip.call("select_all_notes");
-	clip.call("remove_notes_extended", 0, 32);
+	if (clip.id == 0) {
+		var slot = new LiveAPI(this.patcher, "this_device", "canonical_parent", "clip_slots", 0);
+		slot.call("create_clip", 8);
+		clip = new LiveAPI(this.patcher, "this_device", "canonical_parent", "clip_slots", 0, "clip");
+	}
+	clip.call("remove_notes_extended", 0, 127, 0., 8.);
 }
 
 /*

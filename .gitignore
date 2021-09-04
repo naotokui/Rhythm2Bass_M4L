@@ -127,5 +127,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-.DS_Store*
+.DS_Store
 max_patch/M4L_Rhythm2bass/code/node_modules/
