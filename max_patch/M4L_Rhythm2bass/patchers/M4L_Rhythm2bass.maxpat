@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 10,
+			"revision" : 11,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 239.0, 206.0, 1889.0, 1023.0 ],
+		"rect" : [ 182.0, 87.0, 1134.0, 1092.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -40,6 +40,126 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-76",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 685.0, 536.682029724121094, 70.0, 22.0 ],
+					"text" : "loadmess 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"annotation" : "Set true to keep tranlating in every 2-bars",
+					"fontface" : 1,
+					"hint" : "Set true to keep tranlating in every 2-bars",
+					"id" : "obj-73",
+					"maxclass" : "live.text",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"parameter_enable" : 1,
+					"patching_rect" : [ 1071.084315299987793, 364.0, 52.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 139.10377037525177, 129.173585070310708, 63.0, 26.0 ],
+					"saved_attribute_attributes" : 					{
+						"valueof" : 						{
+							"parameter_enum" : [ "val1", "val2" ],
+							"parameter_info" : "Set true to keep tranlating in every 2-bars",
+							"parameter_longname" : "auto_translate",
+							"parameter_mmax" : 1,
+							"parameter_shortname" : "auto_translate",
+							"parameter_type" : 2
+						}
+
+					}
+,
+					"text" : "OFF",
+					"texton" : "ON",
+					"varname" : "auto_translate"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-28",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1071.084315299987793, 334.766988813877106, 70.0, 22.0 ],
+					"text" : "loadmess 1"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-19",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 190.0, 73.0, 357.0, 22.0 ],
+					"text" : "script npm rebuild @tensorflow/tfjs-node build-addon-from-source"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-10",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 42.0, 293.766988813877106, 65.0, 22.0 ],
+					"text" : "s ---to_clip"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-237",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 132.0, 842.0, 97.0, 22.0 ],
+					"saved_object_attributes" : 					{
+						"filename" : "clip-creation.js",
+						"parameter_enable" : 0
+					}
+,
+					"text" : "js clip-creation.js"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-230",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 132.0, 715.0, 63.0, 22.0 ],
+					"text" : "r ---to_clip"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-220",
+					"maxclass" : "newobj",
+					"numinlets" : 5,
+					"numoutlets" : 5,
+					"outlettype" : [ "", "", "", "", "" ],
+					"patching_rect" : [ 132.0, 751.0, 339.0, 22.0 ],
+					"text" : "routepass clip_start clip_num_onsets clip_add_note clip_done"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-54",
 					"maxclass" : "live.button",
 					"numinlets" : 1,
@@ -52,9 +172,9 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "live.button[1]",
+							"parameter_longname" : "generated",
 							"parameter_mmax" : 1,
-							"parameter_shortname" : "live.button[1]",
+							"parameter_shortname" : "generated",
 							"parameter_type" : 2
 						}
 
@@ -85,21 +205,22 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"parameter_enable" : 1,
+					"parameter_mappable" : 0,
 					"patching_rect" : [ 582.5, 302.766988813877106, 15.0, 15.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 6.16627037525177, 1.976560496274146, 15.0, 15.0 ],
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "live.button",
+							"parameter_longname" : "midi_input",
 							"parameter_mmax" : 1,
-							"parameter_shortname" : "live.button",
+							"parameter_shortname" : "midi_input",
 							"parameter_type" : 2
 						}
 
 					}
 ,
-					"varname" : "live.button"
+					"varname" : "midi_input"
 				}
 
 			}
@@ -204,9 +325,9 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "64", "32", "16", "8" ],
-							"parameter_longname" : "live.tab[1]",
+							"parameter_longname" : "loop_duration",
 							"parameter_mmax" : 3,
-							"parameter_shortname" : "live.tab",
+							"parameter_shortname" : "loop_duration",
 							"parameter_type" : 2,
 							"parameter_unitstyle" : 9
 						}
@@ -214,7 +335,7 @@
 					}
 ,
 					"textcolor" : [ 0.67843137254902, 0.67843137254902, 0.67843137254902, 1.0 ],
-					"varname" : "live.tab[1]"
+					"varname" : "loop_duration"
 				}
 
 			}
@@ -262,9 +383,9 @@
 					"saved_attribute_attributes" : 					{
 						"valueof" : 						{
 							"parameter_enum" : [ "off", "on" ],
-							"parameter_longname" : "live.button[6]",
+							"parameter_longname" : "translate",
 							"parameter_mmax" : 1,
-							"parameter_shortname" : "live.button[2]",
+							"parameter_shortname" : "translate",
 							"parameter_type" : 2
 						}
 
@@ -303,7 +424,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 11,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -530,22 +651,6 @@
 					"presentation_rect" : [ 44.10377037525177, 131.673585070310708, 93.0, 21.0 ],
 					"text" : "Auto Translation",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"annotation" : "Set true to keep tranlating in every 2-bars",
-					"hint" : "Set true to keep tranlating in every 2-bars",
-					"id" : "obj-68",
-					"maxclass" : "toggle",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "int" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 1071.084315299987793, 321.0, 63.0, 63.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 141.60377037525177, 126.173585070310708, 32.0, 32.0 ]
 				}
 
 			}
@@ -780,7 +885,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 931.176421165466309, 366.0, 100.605263233184814, 18.0 ],
-					"text" : "/tmp/3020_rec2.mid"
+					"text" : "/tmp/6022_rec3.mid"
 				}
 
 			}
@@ -931,6 +1036,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "float" ],
 					"parameter_enable" : 1,
+					"parameter_mappable" : 0,
 					"patching_rect" : [ 1177.373789548873901, 621.5, 61.0, 15.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 674.48582911491394, 19.976560496274146, 54.5, 15.0 ],
@@ -1002,7 +1108,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 11,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1048,7 +1154,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 11,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1267,7 +1373,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 11,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1486,7 +1592,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 11,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1716,7 +1822,7 @@
 										"appversion" : 										{
 											"major" : 8,
 											"minor" : 1,
-											"revision" : 10,
+											"revision" : 11,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1799,7 +1905,7 @@
 														"appversion" : 														{
 															"major" : 8,
 															"minor" : 1,
-															"revision" : 10,
+															"revision" : 11,
 															"architecture" : "x64",
 															"modernui" : 1
 														}
@@ -2497,6 +2603,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "float" ],
 					"parameter_enable" : 1,
+					"parameter_mappable" : 0,
 					"patching_rect" : [ 595.0, 514.682029724121094, 100.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 450.966102361679077, -0.023439503725853, 66.0, 18.0 ],
@@ -2659,7 +2766,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 10,
+							"revision" : 11,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -3734,6 +3841,13 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-27", 0 ],
+					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-27", 0 ],
 					"source" : [ "obj-2", 0 ]
 				}
 
@@ -3754,6 +3868,20 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-237", 0 ],
+					"source" : [ "obj-220", 2 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-237", 0 ],
+					"source" : [ "obj-220", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-62", 1 ],
 					"source" : [ "obj-23", 1 ]
 				}
@@ -3763,6 +3891,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-62", 0 ],
 					"source" : [ "obj-23", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-220", 0 ],
+					"source" : [ "obj-230", 0 ]
 				}
 
 			}
@@ -3782,6 +3917,14 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-10", 0 ],
+					"order" : 1,
+					"source" : [ "obj-27", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
 					"source" : [ "obj-27", 1 ]
 				}
@@ -3790,7 +3933,15 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-49", 0 ],
+					"order" : 0,
 					"source" : [ "obj-27", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-73", 0 ],
+					"source" : [ "obj-28", 0 ]
 				}
 
 			}
@@ -4179,13 +4330,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-65", 0 ],
-					"source" : [ "obj-68", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-42", 2 ],
 					"midpoints" : [ 645.0, 554.091014862060547, 592.0, 554.091014862060547 ],
 					"source" : [ "obj-69", 1 ]
@@ -4204,6 +4348,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-6", 0 ],
 					"source" : [ "obj-72", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-65", 0 ],
+					"source" : [ "obj-73", 0 ]
 				}
 
 			}
@@ -4228,6 +4379,13 @@
 					"destination" : [ "obj-70", 2 ],
 					"order" : 0,
 					"source" : [ "obj-75", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-5", 0 ],
+					"source" : [ "obj-76", 0 ]
 				}
 
 			}
@@ -4285,15 +4443,16 @@
  ],
 		"parameters" : 		{
 			"obj-103" : [ "transpose", "transpose", 0 ],
-			"obj-14" : [ "live.button", "live.button", 0 ],
+			"obj-14" : [ "midi_input", "midi_input", 0 ],
 			"obj-15" : [ "live.menu", "live.menu", 0 ],
-			"obj-21" : [ "live.button[6]", "live.button[2]", 0 ],
+			"obj-21" : [ "translate", "translate", 0 ],
 			"obj-25" : [ "live.menu[3]", "live.menu", 0 ],
 			"obj-35" : [ "shuffle", "shuffle", 0 ],
 			"obj-43" : [ "live.step", "live.step", 0 ],
-			"obj-5" : [ "live.tab[1]", "live.tab", 0 ],
-			"obj-54" : [ "live.button[1]", "live.button[1]", 0 ],
+			"obj-5" : [ "loop_duration", "loop_duration", 0 ],
+			"obj-54" : [ "generated", "generated", 0 ],
 			"obj-69" : [ "live.tab", "live.tab", 0 ],
+			"obj-73" : [ "auto_translate", "auto_translate", 0 ],
 			"obj-75" : [ "Temperature", "Temperature", 0 ],
 			"obj-97" : [ "duration_ratio", "duration", 0 ],
 			"parameterbanks" : 			{
@@ -4305,7 +4464,7 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "rhythm2bass.js",
-				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/code",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L_Rhythm2bass/code",
 				"patcherrelativepath" : "../code",
 				"type" : "TEXT",
 				"implicit" : 1
@@ -4330,14 +4489,14 @@
 			}
 , 			{
 				"name" : "shuffle_metro.maxpat",
-				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L_Rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "count_for_me.maxpat",
-				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L_Rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
 				"implicit" : 1
@@ -4350,16 +4509,23 @@
 			}
 , 			{
 				"name" : "makenote_for_me.maxpat",
-				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L_Rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "setup_1_16.maxpat",
-				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L-rhythm2bass/patchers/subpatches",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L_Rhythm2bass/patchers/subpatches",
 				"patcherrelativepath" : "./subpatches",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "clip-creation.js",
+				"bootpath" : "~/Documents/GitHub/rhythm2bass/max_patch/M4L_Rhythm2bass/code",
+				"patcherrelativepath" : "../code",
+				"type" : "TEXT",
 				"implicit" : 1
 			}
  ],
