@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 159.0, 143.0, 1110.0, 1023.0 ],
+		"rect" : [ 182.0, 87.0, 1134.0, 1092.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -885,7 +885,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 931.176421165466309, 366.0, 100.605263233184814, 18.0 ],
-					"text" : "/tmp/226_rec3.mid"
+					"text" : "/tmp/6022_rec3.mid"
 				}
 
 			}
@@ -3869,21 +3869,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-237", 0 ],
-					"source" : [ "obj-220", 3 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-237", 0 ],
 					"source" : [ "obj-220", 2 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-237", 0 ],
-					"source" : [ "obj-220", 1 ]
 				}
 
 			}

@@ -94,8 +94,6 @@ async function generateBassline(drum_array, temperature){
         // # update target sequence
         target_seq = yhat
     }
-    console.log(output);
-    utils.post(output);
     
     // For sequencer output
     var pitch_sequence = [];
@@ -203,7 +201,7 @@ Max.addHandler("encode_add", (pitch, time, duration, velocity, muted, mapping) =
 });
 
 Max.addHandler("encode_done", () =>  {
-    utils.post(input_onset);
+//    utils.post(input_onset);
     
     let drum_array = [];
     for (let i=0; i < NUM_STEPS; i++){
