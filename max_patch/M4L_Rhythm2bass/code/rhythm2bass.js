@@ -140,6 +140,9 @@ async function generateBassline(drum_array, temperature){
     }
     assert(pitch_sequence.length == NUM_STEPS && velocity_sequence.length == NUM_STEPS && duration_sequence.length == NUM_STEPS)
 
+	// avoid generating empty sequence
+	if (onset_count == 0) return;
+	 
     Max.outlet("pitch_output", 1, pitch_sequence.join(" "));
     Max.outlet("velocity_output", 1, velocity_sequence.join(" "));
     Max.outlet("duration_output", 1, duration_sequence.join(" "));
