@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 .DS_Store
 max_patch/M4L_Rhythm2bass/code/node_modules/
+max_patch/M4L_Rhythm2bass/.DS_Store
